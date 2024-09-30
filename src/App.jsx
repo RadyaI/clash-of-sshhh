@@ -30,9 +30,12 @@ const Container = styled.div`
 
   img{
     position: absolute;
-    width: 200px;
-    height: 100px;
-    
+    left: 0;
+    right: 0;
+    margin: auto;
+    margin-top: 100px;
+    width: 300px;
+    height: 150px;
   }
 
   @media only screen and (max-width:700px){
