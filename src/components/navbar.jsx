@@ -13,7 +13,7 @@ export default function Navbar() {
                 <img src={icon} alt="Logo Supercell" onClick={() => goToSupercell()} />
                 <div className="list">
                     <div className="nav-list">Player</div>
-                    <div className="nav-list">Clans</div>
+                    <div className="nav-list">Clan</div>
                     <div className="nav-list">Generator</div>
                     <div className="nav-list">Random Troops</div>
                     <div className="nav-list">About Us</div>
