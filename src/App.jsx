@@ -1,5 +1,7 @@
-import styled from "styled-components";
 import { useEffect } from "react";
+import styled from "styled-components";
+ 
+import Navbar from './components/navbar'
 
 import homebg from './assets/bg/bg-home.webp';
 import logo from './assets/bg/bg-coc.webp'
@@ -12,15 +14,30 @@ export default function App() {
 
   return (
     <>
+      <Navbar></Navbar>
       <Container>
         <img src={logo} alt="logo" draggable="false" />
       </Container>
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
     </>
   );
 }
 
 const Container = styled.div`
-
+  z-index: 1;
   width: 100%;
   height: 80dvh;
   background-image: url(${homebg});
