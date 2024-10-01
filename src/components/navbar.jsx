@@ -13,7 +13,7 @@ export default function Navbar() {
     }
 
     const [toggle, setToggle] = useState(false)
-    const [currentValue, setCurrentValue] = useState('')
+    const [currentValue, setCurrentValue] = useState('player')
 
     function selected(value) {
         setCurrentValue(value)
@@ -29,7 +29,7 @@ export default function Navbar() {
             <Nav>
                 <img src={icon} alt="Logo Supercell" onClick={() => goToSupercell()} />
                 <div className="list">
-                    <div className={`nav-list ${currentValue === 'player' ? 'selected' : ''}`} onClick={() => selected("player")}>Player</div>
+                    <Link to="/"><div className={`nav-list ${currentValue === 'player' ? 'selected' : ''}`} onClick={() => selected("player")}>Player</div></Link>
                     <div className={`nav-list ${currentValue === 'clan' ? 'selected' : ''}`} onClick={() => selected("clan")}>Clan</div>
                     <Link to="/generator"><div className={`nav-list ${currentValue === 'generator' ? 'selected' : ''}`} onClick={() => selected("generator")} >Generator</div></Link>
                     <div className={`nav-list ${currentValue === 'randomtroops' ? 'selected' : ''}`} onClick={() => selected("randomtroops")}>Random Troops</div>
@@ -43,7 +43,7 @@ export default function Navbar() {
             </Nav>
             {toggle && (<DropNav className={` ${toggle ? 'toggle' : ''} `}>
                 <div className="list">
-                <div className="nav-list" onClick={() => selected("player")}>Player</div>
+                    <Link to="/"><div className={`nav-list ${currentValue === 'player' ? 'selected' : ''}`} onClick={() => selected("player")}>Player</div></Link>
                     <div className="nav-list" onClick={() => selected("clan")}>Clan</div>
                     <Link to="/generator"><div className="nav-list" onClick={() => selected("generator")} >Generator</div></Link>
                     <div className="nav-list" onClick={() => selected("randomtroops")}>Random Troops</div>
