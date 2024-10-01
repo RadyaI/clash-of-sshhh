@@ -120,7 +120,7 @@ const DropNav = styled.div`
         margin: auto;
         margin-top: 55px;
         background-color: black;
-        border-radius: 0 20px 20px;
+        border-radius: 0 0 20px 20px;
         width: 80%;
         height: 350px;
         display: none;
