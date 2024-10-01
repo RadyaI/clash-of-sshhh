@@ -1,8 +1,10 @@
 import 'bootstrap-icons/font/bootstrap-icons.css';
 
+import { useEffect, useState } from 'react';
 import styled, { keyframes } from "styled-components"
+import { Link } from 'react-router-dom';
+
 import icon from '../assets/supercell_logo.webp'
-import { useState } from 'react';
 
 export default function Navbar() {
 
@@ -11,31 +13,41 @@ export default function Navbar() {
     }
 
     const [toggle, setToggle] = useState(false)
+    const [currentValue, setCurrentValue] = useState('')
+
+    function selected(value) {
+        setCurrentValue(value)
+        sessionStorage.setItem('currentPage', value)
+    }
+
+    useEffect(() => {
+        setCurrentValue(sessionStorage.getItem('currentPage'))
+    }, [])
 
     return (
         <>
             <Nav>
                 <img src={icon} alt="Logo Supercell" onClick={() => goToSupercell()} />
                 <div className="list">
-                    <div className="nav-list">Player</div>
-                    <div className="nav-list">Clan</div>
-                    <div className="nav-list">Generator</div>
-                    <div className="nav-list">Random Troops</div>
-                    <div className="nav-list">About Us</div>
+                    <div className={`nav-list ${currentValue === 'player' ? 'selected' : ''}`} onClick={() => selected("player")}>Player</div>
+                    <div className={`nav-list ${currentValue === 'clan' ? 'selected' : ''}`} onClick={() => selected("clan")}>Clan</div>
+                    <Link to="/generator"><div className={`nav-list ${currentValue === 'generator' ? 'selected' : ''}`} onClick={() => selected("generator")} >Generator</div></Link>
+                    <div className={`nav-list ${currentValue === 'randomtroops' ? 'selected' : ''}`} onClick={() => selected("randomtroops")}>Random Troops</div>
+                    <div className={`nav-list ${currentValue === 'about' ? 'selected' : ''}`} onClick={() => selected("about")}>About Us</div>
                 </div>
                 <div className="menu" onClick={() => setToggle(!toggle)}>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list icon" viewBox="0 0 16 16">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-list icon" viewBox="0 0 16 16">
                         <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5" />
                     </svg>
                 </div>
             </Nav>
-            { toggle && (<DropNav className={` ${toggle ? 'toggle' : ''} `}>
+            {toggle && (<DropNav className={` ${toggle ? 'toggle' : ''} `}>
                 <div className="list">
-                    <div className="nav-list">Player</div>
-                    <div className="nav-list">Clan</div>
-                    <div className="nav-list">Generator</div>
-                    <div className="nav-list">Random Troops</div>
-                    <div className="nav-list">About Us</div>
+                <div className="nav-list" onClick={() => selected("player")}>Player</div>
+                    <div className="nav-list" onClick={() => selected("clan")}>Clan</div>
+                    <Link to="/generator"><div className="nav-list" onClick={() => selected("generator")} >Generator</div></Link>
+                    <div className="nav-list" onClick={() => selected("randomtroops")}>Random Troops</div>
+                    <div className="nav-list" onClick={() => selected("about")}>About Us</div>
                 </div>
             </DropNav>)}
         </>

@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 
 import Navbar from './components/navbar'
@@ -8,6 +8,21 @@ import logo from './assets/bg/bg-coc.webp'
 
 export default function App() {
 
+  const [playerSearch, setPlayerSearch] = useState([])
+
+  function searchPlayer() {
+    try {
+
+      
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  useEffect(() => {
+    searchPlayer()
+  }, [playerSearch])
+
   return (
     <>
       <Navbar></Navbar>
@@ -16,7 +31,12 @@ export default function App() {
       </Container>
       <SearchPlayer>
         <h2>Search Player</h2>
-        <input type="text" placeholder="Search name or tag..." />
+        <div className="input-container">
+          <input type="text" placeholder="Search name or tag..." onChange={(e) => setPlayerSearch(e.target.value)} />
+        </div>
+        <div className="card">
+          <div className="player">Not Work</div>
+        </div>
       </SearchPlayer>
       <br />
       <br />
@@ -57,7 +77,7 @@ const SearchPlayer = styled.div`
   margin: 0 auto;
   margin-top: 30px;
   width: 50%;
-  height: 200px;
+  height: 300px;
   position: relative;
 
   h2{
@@ -66,22 +86,46 @@ const SearchPlayer = styled.div`
     text-align: center;
   }
 
+  .input-container{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
   input{
-    position: absolute;
-    left: 0;
-    right: 0;
+    margin: 0 auto;
+    margin-top: 10px;
     width: 65%;
     height: 50px;
     padding: 0 10px;
     border-radius: 5px;
     outline: none;
     border: none;
-    margin: 0 auto;
-    margin-top: 10px;
     background-color: #3d3d3d;
     color: white;
     font-size: 16px;
     font-weight: bold;
+  }
+
+  .card{
+    margin: 0 auto;
+    margin-top: 15px;
+    width: 90%;
+    height: 55%;
+    overflow: auto;
+  }
+
+  .card .player{
+    background-color: #3d3d3d;
+    margin: 0 auto;
+    margin-top: 15px;
+    width: 80%;
+    height: 70px;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
 @media only screen and (max-width:700px){

@@ -19,3 +19,12 @@
   background-color: #efefef;
   border-radius: 50px;
 }
+
+a{
+  text-decoration: none;
+  color: grey;
+}
+
+.selected{
+  color: white;
+}
