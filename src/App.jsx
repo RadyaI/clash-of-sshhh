@@ -8,10 +8,6 @@ import logo from './assets/bg/bg-coc.webp'
 
 export default function App() {
 
-  useEffect(() => {
-    console.log(homebg);
-  }, []);
-
   return (
     <>
       <Navbar></Navbar>
