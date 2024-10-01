@@ -2,7 +2,7 @@ import 'bootstrap-icons/font/bootstrap-icons.css';
 
 import { useEffect, useState } from 'react';
 import styled, { keyframes } from "styled-components"
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import icon from '../assets/supercell_logo.webp'
 
@@ -12,11 +12,18 @@ export default function Navbar() {
         window.open("https://supercell.com/en/games/clashofclans/")
     }
 
+    const navigate = useNavigate()
+
     const [toggle, setToggle] = useState(false)
-    const [currentValue, setCurrentValue] = useState('player')
+    const [currentValue, setCurrentValue] = useState('/')
 
     function selected(value) {
         setCurrentValue(value)
+        if (value === '/') {
+            navigate('/')
+        } else {
+            navigate(`/${value}`)
+        }
         sessionStorage.setItem('currentPage', value)
     }
 
@@ -29,9 +36,9 @@ export default function Navbar() {
             <Nav>
                 <img src={icon} alt="Logo Supercell" onClick={() => goToSupercell()} />
                 <div className="list">
-                    <Link to="/"><div className={`nav-list ${currentValue === 'player' ? 'selected' : ''}`} onClick={() => selected("player")}>Player</div></Link>
+                    <div className={`nav-list ${currentValue === '/' ? 'selected' : ''}`} onClick={() => selected("/")}>Player</div>
                     <div className={`nav-list ${currentValue === 'clan' ? 'selected' : ''}`} onClick={() => selected("clan")}>Clan</div>
-                    <Link to="/generator"><div className={`nav-list ${currentValue === 'generator' ? 'selected' : ''}`} onClick={() => selected("generator")} >Generator</div></Link>
+                    <div className={`nav-list ${currentValue === 'generator' ? 'selected' : ''}`} onClick={() => selected("generator")} >Generator</div>
                     <div className={`nav-list ${currentValue === 'randomtroops' ? 'selected' : ''}`} onClick={() => selected("randomtroops")}>Random Troops</div>
                     <div className={`nav-list ${currentValue === 'about' ? 'selected' : ''}`} onClick={() => selected("about")}>About Us</div>
                 </div>
