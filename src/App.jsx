@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import styled from "styled-components";
- 
+
 import Navbar from './components/navbar'
 
 import homebg from './assets/bg/bg-home.webp';
@@ -14,17 +14,10 @@ export default function App() {
       <Container>
         <img src={logo} alt="logo" draggable="false" />
       </Container>
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
+      <SearchPlayer>
+        <h2>Search Player</h2>
+        <input type="text" placeholder="Search name or tag..." />
+      </SearchPlayer>
       <br />
       <br />
       <br />
@@ -57,3 +50,42 @@ const Container = styled.div`
     background-repeat: no-repeat;
   }
 `;
+
+const SearchPlayer = styled.div`
+  background-color: #181818; 
+  border-radius: 15px;
+  margin: 0 auto;
+  margin-top: 30px;
+  width: 50%;
+  height: 200px;
+  position: relative;
+
+  h2{
+    padding-top: 10px;
+    color: white;
+    text-align: center;
+  }
+
+  input{
+    position: absolute;
+    left: 0;
+    right: 0;
+    width: 65%;
+    height: 50px;
+    padding: 0 10px;
+    border-radius: 5px;
+    outline: none;
+    border: none;
+    margin: 0 auto;
+    margin-top: 10px;
+    background-color: #3d3d3d;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+  }
+
+@media only screen and (max-width:700px){
+  width: 90%;
+}
+
+`
